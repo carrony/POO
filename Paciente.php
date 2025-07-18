@@ -19,6 +19,15 @@ class Paciente {
         $this->peso=0.0;
     }
 
+    /**
+     * Calculo del IMC del paciente
+     * Se calucla como peso(kg)/altura^2(cm)
+     */
+    public function calculaIMC() {
+        if ($this->peso==0) return 0;
+        return round($this->peso/($this->altura**2),2);
+    }
+
     // setter y getters
 
     /**
