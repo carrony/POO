@@ -7,27 +7,39 @@
 </head>
 <body>
     <?php
+    //session_start();
     require_once("Paciente.php");
-        $david = new Paciente("30000000A", "David", "Casas del Rosal", "C/ La mia 3", "666666666");
+      //  if (!isset($_SESSION["paciente"])) {
+            $david = new Paciente("30000000A", "David", "Casas del Rosal", "C/ La mia 3", "666666666");
+           // $_SESSION["paciente"]=serialize($david);
+       /* } else {
+            $david=unserialize($_SESSION["paciente"]);
+        }*/
 
-        $jesus = new Paciente("44444444L","Jesús", "Hurtado Cebrian", "C/ La tuya 4", "33333333");
+        if (isset($_POST["altura"])) {
+            $david->setAltura($_POST['altura']);
+            $david->setPeso($_POST['peso']);
+           // $_SESSION["paciente"]=serialize($david);
 
+        }
+        
     ?>
     <h1>Datos del paciente</h1>
     <h2>Paciente 1</h2>
     <?php
-        $david->setAltura(1.82);
-        $david->setPeso(89);
         echo $david;
-        $jesus->setAltura(1.75);
-        $jesus->setPeso(92);
     ?>
+    <form action="clinica.php" method="post">
+        Altura (en metros): <input type="text" name="altura"><br>
+        Peso (en Kg): <input type="text" name="peso">
+        <input type="submit" value="Calcula IMC">
+    </form>
+
+
+
+
     <p>El IMC de <?=$david->getNombre()?> es 
     <?=$david->calculaIMC()?></p>
 
-    <h2>Paciente 2</h2>
-    <?=$jesus?>
-    <p>El IMC de <?=$jesus->getNombre()?> es 
-    <?=$jesus->calculaIMC()?></p>
 </body>
 </html>
